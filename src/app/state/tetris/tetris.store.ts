@@ -12,6 +12,7 @@ export interface TetrisState {
   matrix: Tile[];
   current: Piece;
   next: Piece;
+  hold: Piece;
   points: number;
   locked: boolean;
   sound: boolean;
@@ -22,12 +23,15 @@ export interface TetrisState {
   gameState: GameState;
   saved: TetrisState;
   max: number;
+  canHold: boolean;
 }
 
 export const createInitialState = (pieceFactory: PieceFactory): TetrisState => ({
     matrix: MatrixUtil.getStartBoard(),
     current: null,
     next: pieceFactory.getRandomPiece(),
+    hold: pieceFactory.getNonePiece(),
+    canHold: true,
     points: 0,
     locked: true,
     sound: true,
